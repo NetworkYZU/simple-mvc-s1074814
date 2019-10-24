@@ -8,6 +8,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <h1>this is the index page!</h1>
+        <jsp:forward page ="useinclude.jsp"/>
     </body>
 </html>
