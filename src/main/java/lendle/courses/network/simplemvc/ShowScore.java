@@ -6,6 +6,7 @@
 package lendle.courses.network.simplemvc;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -31,8 +32,20 @@ public class ShowScore extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String id=request.getParameter("id");
+        Student student=Student.getStudent(id);
         String address=null;
-        //按照分數選擇頁面
+        if(student==null){
+            address="/WEB-INF/score-report/UnknownStudent.jsp";
+        }else if(student.getScore()<59){
+            address="/WEB-INF/score-report/LowScore.jsp";
+            request.setAttribute("customer", student);
+        }else if(student.getScore()>79){
+            address="/WEB-INF/score-report/HighScore.jsp";
+            request.setAttribute("customer", student);
+        }else{
+            address="/WEB-INF/score-report/NormalScore.jsp";
+            request.setAttribute("student", student);
+        }
         request.getRequestDispatcher(address).forward(request, response);
     }
 

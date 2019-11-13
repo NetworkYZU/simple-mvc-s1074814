@@ -1,1 +1,3 @@
 add score report here
+ String id=request.getParameter("id");
+ Student student=Student.getStudent(id);
